@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+    <alphabank_checkout_failure>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="alphabank/checkout_failure" name="alphabank_checkout_failure" template="alphabank/checkout/failure.phtml"></block>
+        </reference>
+    </alphabank_checkout_failure>
+    
+    <alphabank_checkout_response>
+        <!--<reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>-->
+        <reference name="content">
+            <block type="alphabank/checkout_response" name="alphabank_checkout_response" template="alphabank/checkout/response.phtml"></block>
+        </reference>
+    </alphabank_checkout_response>
+</layout>

@@ -1,0 +1,19 @@
+<fieldset class="form-list">
+    <?php $_code=$this->getMethodCode() ?>
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+        <li>
+            <div class="generic-select-input input-box">
+                <label for="<?php echo $_code ?>_lang"><?php echo $this->__('Select Language') ?></label><br />
+                <select id="<?php echo $_code ?>_lang" name="payment[lang]">
+                    <option value="">--<?php echo $this->__('Please Select') ?>--</option>
+                    <option value="el"><?php echo $this->__('Greek');?></option>
+                    <option value="en"><?php echo $this->__('English');?></option>
+                    <option value="fr"><?php echo $this->__('French');?></option>
+                </select>
+            </div>
+        </li>
+        <li>
+            <?php echo $this->__('You will be redirected to Alpha e-Commerce website when you place an order.') ?>
+        </li>
+    </ul>
+</fieldset>
