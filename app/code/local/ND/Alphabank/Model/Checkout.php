@@ -50,6 +50,12 @@ class ND_Alphabank_Model_Checkout extends Mage_Payment_Model_Method_Abstract
         return $transaction_type;            
     }
 
+    public function getLanguage()
+    {
+        $language = Mage::getStoreConfig('payment/' . $this->getCode() . '/language');
+        return $language;
+    }
+    
     public function validate()
     {           
         $paymentInfo = $this->getInfoInstance();
@@ -58,10 +64,10 @@ class ND_Alphabank_Model_Checkout extends Mage_Payment_Model_Method_Abstract
         } else {
             $currency_code = $paymentInfo->getQuote()->getBaseCurrencyCode();
         }     
-        if($paymentInfo->getLang()!='') {
-            $paymentInfo->setAdditionalInformation('lang',$paymentInfo->getLang());
-            //Mage::throwException($paymentInfo->getLang());
-        }
+//        if($paymentInfo->getLang()!='') {
+//            $paymentInfo->setAdditionalInformation('lang',$paymentInfo->getLang());
+//            //Mage::throwException($paymentInfo->getLang());
+//        }
         return true;
     }
 
@@ -107,7 +113,7 @@ class ND_Alphabank_Model_Checkout extends Mage_Payment_Model_Method_Abstract
         $additional_information = $paymentInfo->getAdditionalInformation();
         $fieldsArr['mid']  = $this->getMerchantId();                                    
             $form_data_array[1] = $fieldsArr['mid'] ;                                                   //Req
-        $fieldsArr['lang'] = (!empty($additional_information['lang']))?$additional_information['lang']:'';  
+        $fieldsArr['lang'] = $this->getLanguage();  
             $form_data_array[2] = $fieldsArr['lang'];                                                   //Opt
         $fieldsArr['deviceCategory'] = "";                         
             $form_data_array[3] = $fieldsArr['deviceCategory'];                                         //Opt
