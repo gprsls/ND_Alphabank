@@ -263,7 +263,16 @@ class ND_Alphabank_Model_Checkout extends Mage_Payment_Model_Method_Abstract
     public function assignData($data)
     {
         //Mage::throwException(implode(',',$data));
-        $result = parent::assignData($data); 
+        
+        // Call parent assignData
+        $result = parent::assignData($data);
+
+        // Get Mage_Payment_Model_Info instance from quote 
+        $info = $this->getInfoInstance();
+
+        // Add some arbitrary post data to the Mage_Payment_Model_Info instance 
+        // so it is saved in the DB in the 'additional_information' field
+        $info->setAdditionalInformation('installments', $data->getInstallments());
         return $result;
     }
     /**
