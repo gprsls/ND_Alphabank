@@ -4,10 +4,10 @@
 			$installments = Mage::helper('alphabank/installments')->getInstallments();
 			$orderTotal = Mage::helper('alphabank/installments')->getOrderTotal();
 			function string_to_array($string) {
-				$exploded_string = explode(",",$string);
+				$exploded_string = explode(",",$string);    // explode with ,
 				$installments_array = array();
 				foreach ($exploded_string as $value) {
-					$result = explode(':',$value);
+					$result = explode(':',$value);  // explode with :
 					$installments_array[$result[0]] = $result[1];
 				}
 				return $installments_array;
