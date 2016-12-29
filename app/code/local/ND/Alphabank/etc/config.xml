@@ -2,7 +2,7 @@
 <config>
     <modules>
         <ND_Alphabank>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
         </ND_Alphabank>
     </modules>
     <global>
@@ -67,6 +67,7 @@
                 <merchant_id backend_model="adminhtml/system_config_backend_encrypted"/>                
                 <model>alphabank/checkout</model>
                 <title>Alpha Bank e-Commerce</title>
+                <installmentsoffset>0</installmentsoffset>
                 <order_status>processing</order_status>
                 <allowspecific>0</allowspecific>
             </alphabank_checkout>
