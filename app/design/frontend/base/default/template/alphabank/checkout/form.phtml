@@ -1,8 +1,8 @@
 <fieldset class="form-list">
     <?php	$_code=$this->getMethodCode() ?>
 	<?php 
-			$installments = Mage::helper('alphabank/installments')->getInstallments();
-			$orderTotal = Mage::helper('alphabank/installments')->getOrderTotal();
+			$installments = Mage::helper('alphabank/data')->getInstallments();
+			$orderTotal = Mage::helper('alphabank/data')->getOrderTotal();
 			function string_to_array($string) {
 				$exploded_string = explode(",",$string);    // explode with ,
 				$installments_array = array();
