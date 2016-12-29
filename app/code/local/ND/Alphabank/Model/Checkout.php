@@ -56,6 +56,29 @@ class ND_Alphabank_Model_Checkout extends Mage_Payment_Model_Method_Abstract
         return $language;
     }
     
+    public function getInstallmentperiod()
+    {
+        $paymentInfo = $this->getInfoInstance();
+        $installmentperiod = '';
+        $installments = $paymentInfo->getAdditionalInformation('installments');
+        if ($installments >= 2){
+            $installmentperiod = $installments;
+        } 
+        return $installmentperiod;
+    }
+
+    public function getInstallmentOffSet()
+    {
+        $installmentsoffset = '';
+        if ($this->getInstallmentperiod() >= 2) {
+            $installmentsoffset = Mage::getStoreConfig('payment/' . $this->getCode() . '/installmentsoffset');
+            if(!$installmentsoffset || $installmentsoffset < 1) {
+                $installmentsoffset = '0';
+            }
+        }
+        return $installmentsoffset;
+    }
+    
     public function validate()
     {           
         $paymentInfo = $this->getInfoInstance();
@@ -163,9 +186,9 @@ class ND_Alphabank_Model_Checkout extends Mage_Payment_Model_Method_Abstract
             $form_data_array[25] = $fieldsArr['payMethod'];                                             //Opt
         $fieldsArr['trType'] = $this->getTransactionType();                            
             $form_data_array[26] = $fieldsArr['trType'];                                                //Opt
-        $fieldsArr['extInstallmentoffset'] = '';    
+        $fieldsArr['extInstallmentoffset'] = $this->getInstallmentOffSet();    
             $form_data_array[27] = $fieldsArr['extInstallmentoffset'];                                  //Opt
-        $fieldsArr['extInstallmentperiod'] = '';    
+        $fieldsArr['extInstallmentperiod'] = $this->getInstallmentperiod();    
             $form_data_array[28] = $fieldsArr['extInstallmentperiod'];                                  //Opt
         $fieldsArr['extRecurringfrequency'] = '';    
             $form_data_array[29] = $fieldsArr['extRecurringfrequency'];                                 //Opt
