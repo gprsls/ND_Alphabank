@@ -1,19 +1,53 @@
 <fieldset class="form-list">
-    <?php $_code=$this->getMethodCode() ?>
+    <?php	$_code=$this->getMethodCode() ?>
+	<?php 
+			$installments = Mage::helper('alphabank/installments')->getInstallments();
+			$orderTotal = Mage::helper('alphabank/installments')->getOrderTotal();
+			function string_to_array($string) {
+				$exploded_string = explode(",",$string); // explode with ,
+				$installments_array = array();
+				foreach ($exploded_string as $value) {
+					$result = explode(':',$value); // explode with :
+					$installments_array[$result[0]] = $result[1];
+				}
+				return $installments_array;
+			}
+			$installments = string_to_array($installments);
+			$max_installments = "";
+			foreach($installments as $threshold => $threshold_value) {	
+				if($orderTotal >= $threshold) {
+					$max_installments = $threshold_value;
+				}
+				if($max_installments > 12) {
+					$max_installments = 12;
+				}
+			}
+			$i = 1;
+			$installments_options = array();
+			while($i <= $max_installments){
+				$installments_options[] = $i;
+				$i++;
+			}
+    ?>
     <ul id="payment_form_<?php echo $_code ?>" style="display:none">
-        <!--
-        <li>
-            <div class="generic-select-input input-box">
-                <label for="<?php echo $_code ?>_lang"><?php echo $this->__('Select Language') ?></label><br />
-                <select id="<?php echo $_code ?>_lang" name="payment[lang]">
-                    <option value="">--<?php echo $this->__('Please Select') ?>--</option>
-                    <option value="el"><?php echo $this->__('Greek');?></option>
-                    <option value="en"><?php echo $this->__('English');?></option>
-                    <option value="fr"><?php echo $this->__('French');?></option>
-                </select>
-            </div>
-        </li>
-        -->
+	<?php	
+		if($max_installments > 1) {
+			$selectNum = $this->__('Select number of installments');
+			$pleaseSelect =  $this->__('Please Select');
+			echo '		
+			<li>
+			  <div class="generic-select-input input-box">
+				  <label for="' . $_code . '_installments">'. $selectNum . '</label><br />
+				  <select id="' . $_code . '_installments" name="payment[installments]">
+					<option selected="selected">1</option>';
+					  foreach($installments_options as $option) {
+						echo '<option value="' . $option . '">' . $option . '</option>';
+					}
+		echo     '</select>
+			  </div>
+			</li>';
+		}
+	?>
         <li>
             <?php echo $this->__('You will be redirected to Alpha e-Commerce website when you place an order.') ?>
         </li>
