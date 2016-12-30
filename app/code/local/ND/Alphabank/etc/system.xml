@@ -79,7 +79,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </transaction_type>
-                        <transaction_type translate="label">
+                        <gateway_language translate="label">
                             <label>Gateway Language</label>
                             <frontend_type>select</frontend_type>
                             <source_model>alphabank/system_config_source_language</source_model>
@@ -87,7 +87,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
-                        </transaction_type>
+                        </gateway_language>
                         <installments translate="label">
                            <label>Installments</label>
                            <comment>90:3,180:6 (90 euro order - allow 3 installments etc.)</comment>
