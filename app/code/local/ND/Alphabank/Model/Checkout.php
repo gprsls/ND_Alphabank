@@ -52,7 +52,7 @@ class ND_Alphabank_Model_Checkout extends Mage_Payment_Model_Method_Abstract
 
     public function getLanguage()
     {
-        $language = Mage::getStoreConfig('payment/' . $this->getCode() . '/language');
+        $language = Mage::getStoreConfig('payment/' . $this->getCode() . '/gateway_language');
         return $language;
     }
     
