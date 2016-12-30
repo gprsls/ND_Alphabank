@@ -1,18 +1,8 @@
 <?php 
 
-class ND_Alphabank_Block_Payment_Info extends Mage_Payment_Block_Info_Cc
+class ND_Alphabank_Block_Payment_Info extends Mage_Payment_Block_Info // Mage_Payment_Block_Info_Cc
 {
-    /**
-     * Don't show CC type for non-CC methods
-     *
-     * @return string|null
-     */
-    public function getCcTypeName()
-    {
-        return parent::getCcTypeName();
-    }
-
-    /**
+      /**
      * Prepare Alphabank-specific payment information
      *
      * @param Varien_Object|array $transport
@@ -21,13 +11,10 @@ class ND_Alphabank_Block_Payment_Info extends Mage_Payment_Block_Info_Cc
     protected function _prepareSpecificInformation($transport = null)
     {
         $transport = parent::_prepareSpecificInformation($transport);
-        $payment = $this->getInfo();
-        $vpcInfo = Mage::getModel('alphabank/info');
-        if (!$this->getIsSecureMode()) {
-            $info = $vpcInfo->getPaymentInfo($payment, true);
-        } else {
-            $info = $vpcInfo->getPublicPaymentInfo($payment, true);
-        }
-        return $transport->addData($info);
+        $info = $this->getInfo();
+        $transport->addData(array(
+            Mage::helper('payment')->__('Number of Installments') => $info->getAdditionalInformation('installments'),
+        ));
+        return $transport;
     }
 }
