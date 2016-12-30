@@ -60,6 +60,15 @@
                 </alphabank>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <ND_Alphabank>
+                    <files>
+                        <default>ND_Alphabank.csv</default>
+                    </files>
+                </ND_Alphabank>
+            </modules>
+        </translate>
     </frontend>
     <default>
         <payment>            
