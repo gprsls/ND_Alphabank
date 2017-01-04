@@ -4,6 +4,7 @@
         $max_installments = $this->getMaxInstallments();
         $installments_options = $this->getInstallmentsOptions($max_installments);
     ?>
+    
     <ul id="payment_form_<?php echo $_code ?>" style="display:none">
 	<?php	
 		if($max_installments > 1) {
